@@ -1,0 +1,51 @@
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            pom {
+                name = project.name
+                description = project.name
+                url = 'http://www.paranora.com'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'paranora'
+                        name = 'paranora'
+                        email = 'paranora@163.com'
+                    }
+                }
+//                    scm {
+//                        connection = 'scm:git:git://example.com/my-library.git'
+//                        developerConnection = 'scm:git:ssh://example.com/my-library.git'
+//                        url = 'http://example.com/my-library/'
+//                    }
+            }
+            afterEvaluate {
+                if (project.getPlugins().findPlugin("war"))
+                    from components.web
+                else
+                    from components.java
+                groupId project.group
+                artifactId project.name
+                version project.version
+            }
+        }
+    }
+    repositories {
+        maven {
+            def releasesRepoUrl = "http://nexus.aist.io/nexus/repository/maven-releasess/"
+            def snapshotsRepoUrl = "http://nexus.aist.io/nexus/repository/maven-snapshots/"
+            url = isReleasedVersion ? releasesRepoUrl : snapshotsRepoUrl
+            credentials {
+                username 'admin'
+                password 'admin123'
+            }
+        }
+    }
+}

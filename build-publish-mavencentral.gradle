@@ -1,0 +1,52 @@
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+
+            pom {
+                name = project.name
+                description = project.name
+                url = "https://github.com/paranara/spring-cache-starter"
+                scm {
+                    connection = "scm:git:git@github.com:paranara/spring-cache-starter.git"
+                    developerConnection = "scm:git:ssh://github.com/paranara/spring-cache-starter.git"
+                    url = "https://github.com/paranara/spring-cache-starter.git"
+                }
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = "paranara"
+                        name = "paranara"
+                        email = "paranara@163.com"
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            url = isReleasedVersion ? releasesRepoUrl : snapshotsRepoUrl
+            credentials {
+                username findProperty("ossrhUsername") ?: System.getenv("OSSRH_USERNAME")
+                password findProperty("ossrhPassword") ?: System.getenv("OSSRH_PASSWORD")
+            }
+        }
+    }
+
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}

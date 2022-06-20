@@ -1,0 +1,69 @@
+git add .##intellJ
+*_IS_UNDEFINED
+
+*IS_UNDEFINED
+
+*.swp
+
+*.iml
+
+.idea/
+
+*.ipr
+*.iws
+
+/bin/
+bin/
+
+/out/
+
+out/
+
+## Eclipse Core
+.project
+.classpath
+.settings
+
+# External tool builders
+.externalToolBuilers/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific
+.buildpath
+
+# TeXlipse plugin
+.texlipse
+
+## Maven
+target/
+
+ffang-source-query/log.base_IS_UNDEFINED/logs/
+
+## Mac
+.DS_Store
+
+## SVN
+.svn
+
+## tomcat 
+catalina.base_IS_UNDEFINED
+
+## rebel
+rebel-remote.xml
+rebel.xml
+.gradle/
+#gradle/
+#gradlew
+#gradlew.bat
+conversation-assistant-core/out/

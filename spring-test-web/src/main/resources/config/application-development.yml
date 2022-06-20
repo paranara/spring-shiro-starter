@@ -1,0 +1,81 @@
+cache:
+#  keySerializerClass: org.paranora.cache.redis.serializer.RedisKeyStringSerializer
+  keyPrefix: paranora_t_
+  keyDelimiter: ':'
+  #缓存过期时间（单位秒）
+  exprieTimes:
+    paranora-test: 300
+    employeeInfoCache: 86400
+    licenseCache: 86400
+
+
+server:
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
+  port: 8091
+
+spring:
+#  main:
+#    allow-bean-definition-overriding: true
+  application:
+    name: spring-test-web
+
+shiro:
+  cas:
+    server:
+      serviceUrl: http://sso.sh.centaline.com.cn/aist-sso-web
+      loginUrl: ${shiro.cas.server.serviceUrl}/login
+      logoutUrl: ${shiro.cas.server.serviceUrl}/logout
+    client:
+      serviceUrl: http://${spring.application.name}.paranora.com:${server.port}${server.servlet.context-path}
+      callbackUrl: ${shiro.cas.client.serviceUrl}/callback
+#  jwt:
+#    salt: 12345678901234567890123456789088
+#    expiresTime: 1800
+#  session:
+#    timeOut: 1800000
+#    cacheKeyPrefix: 'PARANORA_SESSION_${spring.application.name}:'
+#  sessionIdCookie:
+#    name: sid_paranora
+#    domain: paranora.com
+#    path: /
+#    maxAge: -1
+#    httpOnly: true
+  secretkey:
+    keys:
+      paranora: 123321
+  filter:
+    "[/anon/**]": anon
+    "[/**]": default
+
+redis:
+  enabled: true
+  usePool: true
+  timeout: 5000
+  pool:
+    maxIdle: 100
+    minIdle: 0
+    maxActive: 500
+    maxWait: -1
+    numTestsPerEvictionRun: 0
+    softMinEvictableIdleTimeMillis: 0
+    minEvictableIdleTimeMillis: 0
+    lifo: true
+    fairness: false
+  sentinel:
+    enabled: true
+    master: mymaster
+  cluster:
+    enabled: true
+    maxRedirects: 5
+    nodes:
+      - redis.a.com:5000
+      - redis.a.com:5001
+      - redis.a.com:5002
+      - redis.b.com:5003
+      - redis.b.com:5004
+      - redis.b.com:5005

@@ -1,0 +1,26 @@
+apply from: rootProject.file("build-publish-private.gradle")
+
+
+dependencies {
+    implementation libraries.shiro
+    implementation libraries.casclient
+    implementation libraries.pac4j
+    implementation libraries.apachecommons
+
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: httpclientVersion
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
+
+    implementation group: 'com.alibaba', name: 'fastjson', version: fastjsonVersion
+
+    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: springBootVersion
+
+    implementation group: 'javax.servlet', name: 'javax.servlet-api', version: javaxServletVersion
+
+    implementation group: 'org.apache.cxf', name: 'cxf-rt-frontend-jaxrs', version: cxfRtFrontendJaxrsVersion
+
+    implementation group: 'com.google.guava', name: 'guava', version: guavaVersion
+}

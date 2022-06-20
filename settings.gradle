@@ -1,0 +1,4 @@
+rootProject.name = "spring-shiro-starter"
+include 'spring-shiro-starter'
+include 'spring-test-web'
+

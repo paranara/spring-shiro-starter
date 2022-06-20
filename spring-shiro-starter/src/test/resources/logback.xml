@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" debug="true">
+    <property name="LOG_DIR" value="${catalina.base}/logs"/>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_DIR}/cas-client-web.log</file>
+        <encoder>
+            <pattern>%date %level [%thread] %logger{10} [%file : %line] %msg%n
+            </pattern>
+            <outputPatternAsHeader>true</outputPatternAsHeader>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date %level [%thread] %logger{10} [%file : %line] %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${LOG_DIR}/aist-filesvr-web.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %level [%thread] %logger{10} [%file : %line] %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework.beans.TypeConverterDelegate">
+        <level value="error"/>
+    </logger>
+    <logger name="org.hibernate.engine.internal.StatisticalLoggingSessionEventListener">
+        <level value="error"></level>
+    </logger>
+    <logger name="org.springframework.context.support.PostProcessorRegistrationDelegate">
+        <level value="error"></level>
+    </logger>
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <level value="error"></level>
+    </logger>
+    <logger name="org.springframework.beans.factory.xml.XmlBeanDefinitionReader">
+        <level value="error"></level>
+    </logger>
+    <logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory">
+        <level value="error"></level>
+    </logger>
+
+    <logger name="io.buji.pac4j.filter" level="debug"></logger>
+    <logger name="org.pac4j.core.client.finder" level="debug"></logger>
+    <logger name="org.pac4j.core.client.finder" level="debug"></logger>
+    <logger name="org.pac4j.core.engine" level="debug"></logger>
+
+    <root level="ALL">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
