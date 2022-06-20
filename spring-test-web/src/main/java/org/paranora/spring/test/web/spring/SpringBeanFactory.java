@@ -4,11 +4,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 
-/**
- * @author :  paranora
- * @description :  TODO
- * @date :  2021/9/13 17:59
- */
 public class SpringBeanFactory implements BeanFactoryAware {
 
     public static BeanFactory BeanFactory;
