@@ -43,8 +43,8 @@ publishing {
             def snapshotsRepoUrl = "http://nexus.aist.io/nexus/repository/maven-snapshots/"
             url = isReleasedVersion ? releasesRepoUrl : snapshotsRepoUrl
             credentials {
-                username 'admin'
-                password 'admin123'
+                username findProperty("nexusUsername") ?: System.getenv("NEXUS_USERNAME")
+                password findProperty("nexusPassword") ?: System.getenv("NEXUS_PASSWORD")
             }
         }
     }
