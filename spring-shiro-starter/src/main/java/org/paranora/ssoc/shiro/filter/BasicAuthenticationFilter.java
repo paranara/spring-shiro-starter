@@ -1,6 +1,7 @@
 package org.paranora.ssoc.shiro.filter;
 
-import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.paranora.ssoc.shiro.vo.RestfulResponse;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,12 @@ import java.io.PrintWriter;
  * The type Basic authentication filter.
  */
 public class BasicAuthenticationFilter extends BasicHttpAuthenticationFilter {
+
+    protected ObjectMapper objectMapper;
+
+    public BasicAuthenticationFilter(){
+        this.objectMapper=new ObjectMapper();
+    }
 
     /**
      * Write response content.
@@ -39,6 +46,15 @@ public class BasicAuthenticationFilter extends BasicHttpAuthenticationFilter {
         }
     }
 
+    protected void writeResponseContent(ServletResponse response, RestfulResponse content) {
+        try {
+            String json=this.objectMapper.writeValueAsString(content);
+            writeResponseContent(response,json);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
         boolean state= super.preHandle(request, response);
@@ -58,7 +74,7 @@ public class BasicAuthenticationFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean sendChallenge(ServletRequest request, ServletResponse response) {
         boolean loggedIn= super.sendChallenge(request, response);
-        writeResponseContent(response, JSON.toJSONString(RestfulResponse.fail("508", "rest authentication error!")));
+        writeResponseContent(response,RestfulResponse.fail("508", "rest authentication error!"));
         return loggedIn;
     }
 }

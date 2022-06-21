@@ -1,6 +1,7 @@
 package org.paranora.ssoc.pac4j.engine;
 
-import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.paranora.ssoc.shiro.vo.RestfulResponse;
 import org.pac4j.core.client.Client;
 import org.pac4j.core.context.JEEContext;
@@ -21,6 +22,12 @@ import java.util.List;
  * @param <C> the type parameter
  */
 public class BasicSecurityLogic<R, C extends WebContext> extends DefaultSecurityLogic<R, C> {
+
+    protected ObjectMapper objectMapper;
+
+    public BasicSecurityLogic(){
+        this.objectMapper=new ObjectMapper();
+    }
 
     @Override
     protected HttpAction unauthorized(C context, List<Client<? extends Credentials>> currentClients) {
@@ -54,7 +61,11 @@ public class BasicSecurityLogic<R, C extends WebContext> extends DefaultSecurity
      * @return the string
      */
     protected String responseToJson(RestfulResponse restfulResponse){
-        return JSON.toJSONString(restfulResponse);
+        try {
+            return objectMapper.writeValueAsString(restfulResponse);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

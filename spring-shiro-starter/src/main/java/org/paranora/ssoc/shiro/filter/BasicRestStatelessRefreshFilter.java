@@ -1,6 +1,5 @@
 package org.paranora.ssoc.shiro.filter;
 
-import com.alibaba.fastjson.JSON;
 import org.paranora.ssoc.pac4j.context.BasicWebContext;
 
 import org.paranora.ssoc.shiro.token.BasicRestStatelessRefreshAuthToken;
@@ -62,7 +61,7 @@ public class BasicRestStatelessRefreshFilter extends BasicAuthenticationFilter {
 
     @Override
     protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException ae, ServletRequest request, ServletResponse response) {
-        writeResponseContent(response, JSON.toJSONString(RestfulResponse.fail("503", "refresh error!")));
+        writeResponseContent(response, RestfulResponse.fail("503", "refresh error!"));
         return false;
     }
 

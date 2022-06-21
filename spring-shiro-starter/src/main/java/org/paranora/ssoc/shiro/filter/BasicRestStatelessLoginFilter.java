@@ -1,6 +1,6 @@
 package org.paranora.ssoc.shiro.filter;
 
-import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.paranora.ssoc.shiro.token.BasicRestStatelessLoginAuthToken;
 import org.paranora.ssoc.shiro.vo.RestfulResponse;
 import org.apache.shiro.authc.AuthenticationException;
@@ -33,7 +33,7 @@ public class BasicRestStatelessLoginFilter extends BasicAuthenticationFilter {
 
     @Override
     protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException ae, ServletRequest request, ServletResponse response) {
-        writeResponseContent(response,JSON.toJSONString(RestfulResponse.fail("500","login error!")));
+        writeResponseContent(response,RestfulResponse.fail("500","login error!"));
         return false;
     }
 

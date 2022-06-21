@@ -10,11 +10,8 @@ dependencies {
     implementation libraries.guava
     implementation libraries.javax
 
-    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: httpclientVersion
     implementation group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
-
-    implementation group: 'com.alibaba', name: 'fastjson', version: fastjsonVersion
 
     implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
