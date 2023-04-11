@@ -73,6 +73,8 @@ public class SimpleSecretKeyAuthenticator extends ProfileDefinitionAware<SimpleC
             simpleCiphertextProfile.addAttribute("timestamp", credentials.getTimestamp());
             simpleCiphertextProfile.addAttribute("sign", credentials.getSign());
             credentials.setUserProfile(simpleCiphertextProfile);
+        } catch (CredentialsException ce) {
+            throw ce;
         } catch (Exception e) {
             throw new CredentialsException("SecretKeyAuthenticator validate error", e);
         }

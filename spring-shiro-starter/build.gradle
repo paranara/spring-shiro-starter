@@ -1,5 +1,5 @@
-//apply from: rootProject.file("build-publish-private.gradle")
-apply from: rootProject.file("build-publish-mavencentral.gradle")
+apply from: rootProject.file("build-publish-private.gradle")
+//apply from: rootProject.file("build-publish-mavencentral.gradle")
 
 dependencies {
     implementation libraries.shiro
